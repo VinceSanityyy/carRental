@@ -10,7 +10,9 @@ Vue.component('Home', require('./components/Home.vue').default);
 
 Vue.use(VueGoogleMaps, {
     load: {
-      key: 'AIzaSyCZS1-x2tYC7qwUoiCsy3pJdezTeo2O6xA',
+      // key: 'AIzaSyCZS1-x2tYC7qwUoiCsy3pJdezTeo2O6xA',
+      key: 'AIzaSyCrB9vRQ_X7_uPV_q4IOGrT6h3Kh40oFJw',
+
       libraries: 'places', // This is required if you use the Autocomplete plugin
       // OR: libraries: 'places,drawing'
       // OR: libraries: 'places,drawing,visualization'
