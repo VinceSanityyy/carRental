@@ -1,16 +1,43 @@
 <template>
-    <div class="container">
-        <gmap-autocomplete @place_changed="setPickupPlace"></gmap-autocomplete>
-        <gmap-autocomplete @place_changed="setToPlace"></gmap-autocomplete>
-  
-        <div class="row justify-content-center">
-            <GmapMap :center="center" :zoom="14" map-type-id="roadmap" style="width: 500px; height: 300px">
-              <gmap-marker :position="fromLocation" :clickable="true" :draggable="false" icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" @drag="dragging($event, false, 'from')" />
-              <gmap-marker :position="toLocation" :clickable="true" :draggable="false" icon="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" @drag="dragging($event, false, 'to')" />
-              <gmap-polyline v-bind:path.sync="newpath" v-bind:options="{ strokeColor:'#008000'}"></gmap-polyline>
-            </GmapMap>
+    <div class="content">
+        <div class="content-header">
+            <div class="container-fluid">
+                <!-- <div class="row mb-2">
+                    <div class="col-sm-6">
+                        Book
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Products</li>
+                        </ol>
+                    </div>
+                </div> -->
+            </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Book
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <gmap-autocomplete @place_changed="setPickupPlace"></gmap-autocomplete>
+                        <gmap-autocomplete @place_changed="setToPlace"></gmap-autocomplete>
+                
+                        <div class="row justify-content-center">
+                            <GmapMap :center="center" :zoom="14" map-type-id="roadmap" style="width: 500px; height: 300px">
+                            <gmap-marker :position="fromLocation" :clickable="true" :draggable="false" icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" @drag="dragging($event, false, 'from')" />
+                            <gmap-marker :position="toLocation" :clickable="true" :draggable="false" icon="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" @drag="dragging($event, false, 'to')" />
+                            <gmap-polyline v-bind:path.sync="newpath" v-bind:options="{ strokeColor:'#008000'}"></gmap-polyline>
+                            </GmapMap>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
