@@ -151,7 +151,7 @@
             <router-link to="/home" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Bookings
+                Reservation
                 <span class="right badge badge-danger">New</span>
               </p>
             </router-link>

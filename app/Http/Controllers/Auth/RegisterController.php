@@ -68,6 +68,7 @@ class RegisterController extends Controller
         // dd(json_encode($data));
         return User::create([
             'name' => $data['name'],
+            'role' => $data['role'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
