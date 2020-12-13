@@ -199,18 +199,27 @@ export default {
          this.totalDays = b.diff(a,'days')
         },
         confirmReservation(){
+            var bodyForm = new FormData();
+            bodyForm.append('totalDays',this.totalDays)
+            bodyForm.append('fromLocation',this.currentPlace.formatted_address)
+            bodyForm.append('toLocation',this.toPlace.formatted_address)
+            bodyForm.append('fromDate',this.fromDate)
+            bodyForm.append('toDate',this.toDate)
+            bodyForm.append('time',this.time)
+            bodyForm.append('totalDistance',this.distanceText)
+
            console.log('clicked')
-           axios.post('/confirmReservation',{
-              totalDays: this.totalDays,
-              fromLocation: this.currentPlace.formatted_address,
-              toLocation: this.toPlace.formatted_address,
-              fromDate: this.fromDate,
-              toDate: this.toDate,
-              time: this.time,
-              totalDistance: this.distanceText,
-           }).then((res)=>{
-              console.log(res)
-           })
+           var object = {};
+            bodyForm.forEach(function(value, key){
+               object[key] = value;
+            });
+            var json = JSON.stringify(object);
+            localStorage.setItem('resDetails',json)
+            this.$router.push('selectCar')
+         //   axios.post('/confirmReservation',bodyForm
+         //   ).then((res)=>{
+         //      console.log(res)
+         //   })
         }
     },
     mounted() {

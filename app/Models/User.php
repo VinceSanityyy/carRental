@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Reservation');
     }
+
+    public function cars()
+    {
+        return $this->hasMany('App\Models\Cars');
+    }
 }

@@ -23,11 +23,13 @@ class ReservationDetails extends Migration
             $table->string('totalDays');
             $table->string('totalDistance');
             $table->string('estimatedDuration');
+            $table->bigInteger('car_id')->unsigned();
             $table->timestamps();
         });
 
         Schema::table('reservation_details', function (Blueprint $table) {
             $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('car_id')->references('id')->on('cars');
         });
     }
 

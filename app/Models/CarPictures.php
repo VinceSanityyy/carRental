@@ -5,32 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cars extends Model
+class CarDetails extends Model
 {
     use HasFactory;
-    protected $table ='cars';
+    protected $table = 'car_pictures';
     protected $guarded = [];
     protected $appends = [
         'image_link'
     ];
 
-    public function userCars()
+    public function pictures()
     {
-        return $this->belongsTo('App\Models\User');
-    }
-
-    public function carPictures()
-    {
-        return $this->hasMany('App\Models\CarDetails');
+        return $this->belongsTo('App\Models\Cars');
     }
 
     public function getImageLinkAttribute()
     {
 
-        if (!empty($this->image)) {
+        if (!empty($this->picture)) {
 
             // explode by /
-            $explode_path = explode('/', $this->image);
+            $explode_path = explode('/', $this->picture);
             // removed first value in array wich is the public of the path
             unset($explode_path[0]);
             // return back to his format

@@ -8,22 +8,36 @@ import swal from 'admin-lte/plugins/sweetalert2/sweetalert2.min.js'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VueRouter from 'vue-router'
-import moment from 'moment';
+import CarModal from './components/CarModal';
+import VueAlertify from 'vue-alertify';
+
 
 Vue.use(VueRouter)
 Vue.use(toastr)
-Vue.use(require('vue-moment'));
-Vue.use('moment')
+Vue.use(VueAlertify,{
+  movable: false,
+  glossary: {
+    title: 'Confirm',
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
+});
+
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Home', require('./components/Home.vue').default);
-
-
+Vue.component('Cars', require('./components/Cars.vue').default);
+Vue.component('CarModal', require('./components/CarModal.vue').default);
+Vue.component('SelectCar', require('./components/SelectCar.vue').default);
 const routes = [
   { path: '/home', component: require('./components/Home.vue').default },
+  { path: '/cars', component: require('./components/Cars.vue').default },
+  { path: '/selectCar', component: require('./components/SelectCar.vue').default },
 ]
 
 window.swal = swal;
 window.toastr = require('toastr')
+
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -39,5 +53,8 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    components:{
+      CarModal
+    }
 });
