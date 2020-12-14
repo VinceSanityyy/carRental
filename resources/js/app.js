@@ -14,6 +14,7 @@ import VueAlertify from 'vue-alertify';
 
 Vue.use(VueRouter)
 Vue.use(toastr)
+Vue.use(Loading)
 Vue.use(VueAlertify,{
   movable: false,
   glossary: {
@@ -29,10 +30,14 @@ Vue.component('Home', require('./components/Home.vue').default);
 Vue.component('Cars', require('./components/Cars.vue').default);
 Vue.component('CarModal', require('./components/CarModal.vue').default);
 Vue.component('SelectCar', require('./components/SelectCar.vue').default);
+Vue.component('login',require('./components/Login.vue').default);
 const routes = [
   { path: '/home', component: require('./components/Home.vue').default },
   { path: '/cars', component: require('./components/Cars.vue').default },
   { path: '/selectCar', component: require('./components/SelectCar.vue').default },
+  { path: '/reservationList', component: require('./components/reservationList.vue').default },
+  { path: '/reservationInfo', component: require('./components/ReservationDetails.vue').default },
+  // { path: '/reservationDetails/:reservationId', component: require('./components/ReservationDetails.vue').default },
 ]
 
 window.swal = swal;

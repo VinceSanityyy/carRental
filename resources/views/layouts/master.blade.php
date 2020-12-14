@@ -152,11 +152,19 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Reservation
-                
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/reservationList" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Reservation List
               </p>
             </router-link>
           </li>
 
+          @if(\Auth::user()->id === \App\Enums\UserType::CAR_OWNER)
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -176,6 +184,15 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <router-link to="/payments" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Payments
+              </p>
+            </router-link>
+          </li>
+          @endif
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link"
             onclick="event.preventDefault();

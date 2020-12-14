@@ -40,4 +40,14 @@ class ReservationController extends Controller
         
         return response()->json('success');
     }
+
+    public function getReservations(){
+        $reservations = Reservation::where('user_id',\Auth::user()->id)->get();
+        return response()->json($reservations);
+    }
+
+    public function getReservationDetails(Request $request){
+        $details = ReservationDetails::where('reservation_id',$request->id)->with('car')->first();
+        return response()->json($details);
+    }
 }

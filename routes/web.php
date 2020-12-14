@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\PaymentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/getCars', [CarsController::class, 'getCars']);
 Route::post('/confirmReservation',[ReservationController::class,'confirmReservation']);
 Route::post('/addCar',[CarsController::class,'addCar']);
+Route::get('/getReservations',[ReservationController::class,'getReservations']);
+Route::get('/getReservationDetails',[ReservationController::class,'getReservationDetails']);
 
+Route::get('paymentsuccess',[PaymentsController::class, 'payment_success']);
+Route::get('paymenterror',[PaymentsController::class, 'payment_error']);
+Route::get('getPaymentList',[PaymentsController::class, 'getPaymentList']);
+Route::post('/charge',[PaymentsController::class, 'charge']);
 
 Route::get('{path}',[App\Http\Controllers\HomeController::class, 'index'])->where( 'path', '([A-z]+)?' );

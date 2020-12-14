@@ -14,6 +14,7 @@ try {
     require('admin-lte');
     require('admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js');
     require('admin-lte/plugins/toastr/toastr.min.js');
+    
 } catch (e) {}
 
 /**

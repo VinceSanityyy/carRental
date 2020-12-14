@@ -10,4 +10,9 @@ class ReservationDetails extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'reservation_details';
+
+    public function car()
+    {
+        return $this->belongsTo('App\Models\Cars',);
+    }
 }
