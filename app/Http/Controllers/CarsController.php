@@ -19,14 +19,19 @@ class CarsController extends Controller
         $car->plate_no = $request->plate_no;
         $car->reservation_fee = $request->reservation_fee;
         $car->pricePerDay = $request->pricePerDay;
-        $car->status = 0;
+        $car->car_status = 0;
         $car->save();
 
         return response()->json('success');
     }
 
     public function getCars(){
-        $cars = Cars::where('status',CarStatus::AVAILABLE)->get();
+        $cars = Cars::all();
+        return response()->json($cars);
+    }
+
+    public function getCarsForOwner(){
+        $cars = Cars::where('user_id',\Auth::user()->id)->get();
         return response()->json($cars);
     }
 }

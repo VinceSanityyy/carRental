@@ -15,18 +15,23 @@ use App\Http\Controllers\PaymentsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', function () {
+    return view('login');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/getCars', [CarsController::class, 'getCars']);
+Route::get('/getCarsForOwner', [CarsController::class, 'getCarsForOwner']);
 Route::post('/confirmReservation',[ReservationController::class,'confirmReservation']);
 Route::post('/addCar',[CarsController::class,'addCar']);
 Route::get('/getReservations',[ReservationController::class,'getReservations']);
 Route::get('/getReservationDetails',[ReservationController::class,'getReservationDetails']);
+Route::get('/getReservationRequest',[ReservationController::class,'getReservationRequest']);
+
+Route::post('/approveReservation',[ReservationController::class,'approveReservation']);
+
 
 Route::get('paymentsuccess',[PaymentsController::class, 'payment_success']);
 Route::get('paymenterror',[PaymentsController::class, 'payment_error']);

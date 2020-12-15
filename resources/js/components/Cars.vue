@@ -35,6 +35,8 @@
                         </div>
                         <div class="card-footer">
                             <h4 style="text-align:center">{{car.model}}</h4>
+                             <span v-if="car.car_status === 1 " class="badge bg-danger">Booked</span>
+                             <span v-else class="badge bg-success">Available for reservation</span>
                            <div class="row">
                               <div class="col-sm-12 border-right">
                                  <div  class="description-block">
@@ -57,7 +59,8 @@
                                  </div>
                               </div>
                            </div>
-                            <button class="btn btn-primary btn-block">View Details</button>
+                            <button @click="viewDetails" class="btn btn-primary btn-block">View Details</button>
+                            <button @click="markUnavailable" class="btn btn-danger btn-block">Mark as Unavailable</button>
                         </div>
                      </div>
                   </div>
@@ -93,9 +96,15 @@ export default {
             this.carModalOpen = !this.carModalOpen
         },
         getCars(){
-           axios.get('/getCars').then((res)=>{
+           axios.get('/getCarsForOwner').then((res)=>{
               this.cars = res.data
            })
+        },
+        viewDetails(){
+            toastr.success('wala pay function')
+        },
+        markUnavailable(){
+            toastr.success('wala pay function')
         }
     },
     created(){

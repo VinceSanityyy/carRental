@@ -32,6 +32,8 @@
                         </div>
                         <div class="card-footer">
                             <h4 style="text-align:center">{{car.model}}</h4>
+                              <span v-if="car.status === 1 " class="badge bg-danger">Booked</span>
+                             <span v-else class="badge bg-success">Available for reservation</span>
                            <div class="row">
                               <div class="col-sm-12 border-right">
                                  <div  class="description-block">
@@ -54,7 +56,8 @@
                                  </div>
                               </div>
                            </div>
-                            <button @click="selectCar(car.id)" class="btn btn-primary btn-block">Select Car</button>
+                            <button v-if="car.car_status === 0 " @click="selectCar(car.id)" class="btn btn-primary btn-block">Select Car</button>
+                            <button v-else class="btn btn-primary btn-block disabled">Select Car</button>
                         </div>
                      </div>
                   </div>
@@ -100,6 +103,8 @@ export default {
                     bodyForm
                 }).then((res)=>{
                     console.log(res)
+                    toastr.success('Booking added!')
+                    window.location.href = '/home'
                     //  localStorage.clear()
                 })
                

@@ -50,4 +50,25 @@ class ReservationController extends Controller
         $details = ReservationDetails::where('reservation_id',$request->id)->with('car')->first();
         return response()->json($details);
     }
+
+    public function getReservationRequest(){
+        $list = \DB::table('cars')
+            ->join('reservation_details','reservation_details.car_id','=','cars.id')
+            ->join('reservations','reservation_details.id','=','reservations.id')
+            ->join('users','users.id','cars.user_id')
+            ->where('cars.user_id',\Auth::user()->id)
+            // ->select('cars.')
+            ->get();
+
+        return response()->json($list);
+    }
+    
+    public function approveReservation(Request $request){
+        // dd($request->reservation_id);
+        $update = Reservation::find($request->reservation_id);
+        $update->status = ReservationStatus::COMPLETED;
+        $update->save();
+
+        return response()->json('success');
+    }
 }

@@ -77,8 +77,8 @@
                       </div>
                   </div>
                   <div class="card-footer">
-                      <button @click="payReservation(reservationDetails.car.reservation_fee)" class="btn btn-primary btn-block">Pay reservation fee</button>
-                       <button class="btn btn-danger btn-block">Cancel reservation</button>
+                      <button @click="payReservation(reservationDetails.car.reservation_fee,reservationDetails.car.id)" class="btn btn-primary btn-block">Pay reservation fee</button>
+                       <button @click="cancelReservation(reservationDetails.car.reservation_fee)" class="btn btn-danger btn-block">Cancel reservation</button>
                        <br><br>
                        <small>Payment is non refundable</small>
                   </div>
@@ -104,7 +104,8 @@ export default {
                 // console.log(this.reservationDetails)
             })
         },
-        payReservation(amount){
+        payReservation(amount,id){
+            console.log('car_id=' + id)
             this.$alertify.confirm('Confirm reservation payment amount: ' + amount, ()=>{
                 console.log(amount)
                 let loader = this.$loading.show({
@@ -118,12 +119,18 @@ export default {
                
                 axios.post('/charge',{
                     amount: amount,
-                    reservation_id: this.reservationId
+                    reservation_id: this.reservationId,
+                    car_id: id
                 }).then((res)=>{
                     loader.hide()
                     console.log(res)
                     window.location.href = res.data
                 })
+            })
+        },
+        cancelReservation(amount){
+            this.$alertify.confirm('Do you want to cancel reservation?',() =>{
+                toastr.success('wala pay function')
             })
         }
     },

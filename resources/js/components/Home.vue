@@ -199,6 +199,7 @@ export default {
          this.totalDays = b.diff(a,'days')
         },
         confirmReservation(){
+            
             var bodyForm = new FormData();
             bodyForm.append('totalDays',this.totalDays)
             bodyForm.append('fromLocation',this.currentPlace.formatted_address)

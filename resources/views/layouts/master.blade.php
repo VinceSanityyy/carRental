@@ -18,12 +18,12 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li> --}}
     </ul>
 
     <!-- Right navbar links -->
@@ -164,7 +164,7 @@
             </router-link>
           </li>
 
-          @if(\Auth::user()->id === \App\Enums\UserType::CAR_OWNER)
+          @if(\Auth::user()->role === \App\Enums\UserType::CAR_OWNER)
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -185,13 +185,21 @@
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/payments" class="nav-link">
+            <router-link to="/paymentList" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Payments
               </p>
             </router-link>
           </li>
+          {{-- <li class="nav-item">
+            <router-link to="/reservationRequest" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Reservation Requests
+              </p>
+            </router-link>
+          </li> --}}
           @endif
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link"
@@ -229,7 +237,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    <strong>Copyright &copy; 2020-2021 <a href="#">CarTal</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.0

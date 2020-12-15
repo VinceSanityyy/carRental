@@ -22,7 +22,7 @@ class CreateCarsTable extends Migration
             $table->string('plate_no');
             $table->string('reservation_fee');
             $table->string('pricePerDay');
-            $table->bigInteger('status')->default(0);
+            $table->bigInteger('car_status')->default(0);
             $table->timestamps();
         });
 

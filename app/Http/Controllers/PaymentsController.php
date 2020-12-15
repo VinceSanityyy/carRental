@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Reservation;
 use Omnipay\Omnipay;
+use App\Models\Cars;
 class PaymentsController extends Controller
 {
     public $gateway;
@@ -20,9 +21,10 @@ class PaymentsController extends Controller
 
     public function charge(Request $request)
     {
-        // dd($request->amount);
+        // dd($request->all());
    
         $request->session()->put('reservation_id', $request->reservation_id);
+        $request->session()->put('car_id', $request->car_id);
 
         $response = $this->gateway->purchase(array(
             'amount' => $request->amount,
@@ -76,6 +78,14 @@ class PaymentsController extends Controller
                     // $payment->reservation_id = $res_id = empty($request->reservation_id) ? 0 : $request->reservation_id;
                     $payment->reservation_id = $request->session()->get('reservation_id');
                     $payment->save();
+
+                    $updateCar = Cars::find($request->session()->get('car_id'));
+                    $updateCar->car_status = 1;
+                    $updateCar->save();
+
+                    $reservation = Reservation::find($request->session()->get('reservation_id'));
+                    $reservation->status = 1;
+                    $reservation->save();
                 }
                 
                 return response()->json("Payment is Successfull. Your transaction id is: ". $arr_body['id']);
@@ -95,12 +105,12 @@ class PaymentsController extends Controller
     }
 
     public function getPaymentList(){
-        $list = \DB::table('payments')
-            ->join('reservations','reservations.id','=','payments.reservation_id')
-            ->join('reservation_details','reservation_details.reservation_id','=','reservations.id')
-            ->join('users','users.id','=','reservations.user_id')
-            ->join('cars','cars.user_id','users.id')
-            ->where('users.id',\Auth::user()->id)
+        $list = \DB::table('cars')
+            ->join('reservation_details','reservation_details.car_id','=','cars.id')
+            ->join('users','cars.user_id','users.id')
+            ->join('reservations','reservations.id','reservation_details.reservation_Id')
+            ->join('payments','payments.reservation_id','reservations.id')
+            ->where('cars.user_id',\Auth::user()->id)
             ->get();
         return response()->json($list);
     }
