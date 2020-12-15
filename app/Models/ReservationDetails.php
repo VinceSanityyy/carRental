@@ -15,4 +15,9 @@ class ReservationDetails extends Model
     {
         return $this->belongsTo('App\Models\Cars',);
     }
+
+    public function reservation()
+    {
+        return $this->belongsTo('App\Models\Reservation');
+    }
 }

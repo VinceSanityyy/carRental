@@ -77,7 +77,8 @@
                       </div>
                   </div>
                   <div class="card-footer">
-                      <button @click="payReservation(reservationDetails.car.reservation_fee,reservationDetails.car.id)" class="btn btn-primary btn-block">Pay reservation fee</button>
+                        <button v-if="reservation.status === 0" @click="payReservation(reservationDetails.car.reservation_fee,reservationDetails.car.id)" class="btn btn-primary btn-block">Pay reservation fee</button>
+                        <button v-else @click="payReservation(reservationDetails.car.reservation_fee,reservationDetails.car.id)" class="btn btn-primary btn-block" disabled>Already Paid</button>
                        <button @click="cancelReservation(reservationDetails.car.reservation_fee)" class="btn btn-danger btn-block">Cancel reservation</button>
                        <br><br>
                        <small>Payment is non refundable</small>
@@ -93,14 +94,16 @@ export default {
     data(){
         return{
             reservationId: this.$route.query.reservationId,
-            reservationDetails:[]
+            reservationDetails:[],
+            reservation: []
         }
     },
     methods:{
         getDetails(){
             axios.get('/getReservationDetails?id='+this.reservationId).then((res)=>{
-                this.reservationDetails = res.data
-                console.log(res.data)
+                this.reservationDetails = res.data.details
+                 this.reservation = res.data.reservation
+                console.log(res.data.details)
                 // console.log(this.reservationDetails)
             })
         },

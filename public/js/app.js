@@ -6512,11 +6512,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       reservationId: this.$route.query.reservationId,
-      reservationDetails: []
+      reservationDetails: [],
+      reservation: []
     };
   },
   methods: {
@@ -6524,8 +6526,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/getReservationDetails?id=' + this.reservationId).then(function (res) {
-        _this.reservationDetails = res.data;
-        console.log(res.data); // console.log(this.reservationDetails)
+        _this.reservationDetails = res.data.details;
+        _this.reservation = res.data.reservation;
+        console.log(res.data.details); // console.log(this.reservationDetails)
       });
     },
     payReservation: function payReservation(amount, id) {
@@ -85544,21 +85547,38 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-footer" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block",
-                on: {
-                  click: function($event) {
-                    return _vm.payReservation(
-                      _vm.reservationDetails.car.reservation_fee,
-                      _vm.reservationDetails.car.id
-                    )
-                  }
-                }
-              },
-              [_vm._v("Pay reservation fee")]
-            ),
+            _vm.reservation.status === 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block",
+                    on: {
+                      click: function($event) {
+                        return _vm.payReservation(
+                          _vm.reservationDetails.car.reservation_fee,
+                          _vm.reservationDetails.car.id
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Pay reservation fee")]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block",
+                    attrs: { disabled: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.payReservation(
+                          _vm.reservationDetails.car.reservation_fee,
+                          _vm.reservationDetails.car.id
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Already Paid")]
+                ),
             _vm._v(" "),
             _c(
               "button",

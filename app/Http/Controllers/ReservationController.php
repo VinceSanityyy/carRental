@@ -47,8 +47,14 @@ class ReservationController extends Controller
     }
 
     public function getReservationDetails(Request $request){
+        // dd($request->all());
         $details = ReservationDetails::where('reservation_id',$request->id)->with('car')->first();
-        return response()->json($details);
+        $reservation = Reservation::where('id',$request->id)->first();
+        // dd($reservation);
+        return response()->json(array(
+            'details' => $details,
+            'reservation' => $reservation
+        ));
     }
 
     public function getReservationRequest(){
