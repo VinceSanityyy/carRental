@@ -35,7 +35,7 @@ class ReservationController extends Controller
         
 
         $update = Cars::find($request->car_id);
-        $update->status = CarStatus::OCCUPIED;
+        $update->car_status = CarStatus::OCCUPIED;
         $update->save();
         
         return response()->json('success');

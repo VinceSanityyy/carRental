@@ -6685,7 +6685,9 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (res) {
           console.log(res);
           toastr.success('Booking added!');
-          window.location.href = '/home'; //  localStorage.clear()
+          setTimeout(function () {
+            window.location.href = '/home';
+          }, 2000); //  localStorage.clear()
         });
       }, function () {
         return console.log('no');

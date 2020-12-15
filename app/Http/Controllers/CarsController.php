@@ -26,7 +26,7 @@ class CarsController extends Controller
     }
 
     public function getCars(){
-        $cars = Cars::all();
+        $cars = Cars::where('car_status',CarStatus::AVAILABLE)->get();
         return response()->json($cars);
     }
 

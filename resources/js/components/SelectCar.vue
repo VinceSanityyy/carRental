@@ -104,7 +104,10 @@ export default {
                 }).then((res)=>{
                     console.log(res)
                     toastr.success('Booking added!')
-                    window.location.href = '/home'
+                    setTimeout(function(){
+                     window.location.href = '/home'
+                    },2000)
+
                     //  localStorage.clear()
                 })
                
