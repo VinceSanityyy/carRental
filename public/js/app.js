@@ -6362,6 +6362,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6370,7 +6374,8 @@ __webpack_require__.r(__webpack_exports__);
       confirmPass: '',
       name: '',
       phone: '',
-      role: ''
+      role: '',
+      image: ''
     };
   },
   methods: {
@@ -6387,23 +6392,35 @@ __webpack_require__.r(__webpack_exports__);
             width: 80,
             height: 100
           });
-          axios.post('register', {
-            email: this.email,
-            password: this.password,
-            phone: this.phone,
-            name: this.name,
-            role: this.role
-          }).then(function (res) {
+          var bodyForm = new FormData();
+          bodyForm.append('email', this.email);
+          bodyForm.append('password', this.password);
+          bodyForm.append('phone', this.phone);
+          bodyForm.append('name', this.name);
+          bodyForm.append('role', this.role);
+          bodyForm.append('identity', this.image);
+          axios.post('register', bodyForm).then(function (res) {
             loader.hide(); // console.log(res)
 
             window.location.href = '/home';
           })["catch"](function (err) {
-            loader.hide(); // toastr.error('Records not found')
+            loader.hide();
+            console.log(err.response.data.errors);
+            var errors = err.response.data.errors;
+
+            for (var _i = 0, _Object$keys = Object.keys(errors); _i < _Object$keys.length; _i++) {
+              var key = _Object$keys[_i];
+              toastr.error(errors[key]);
+            }
           });
         } else {
           toastr.error('Not valid PH phone number');
         }
       }
+    },
+    onFileChange: function onFileChange(e) {
+      var file = e.target.files[0];
+      this.image = file;
     }
   },
   created: function created() {
@@ -85295,6 +85312,17 @@ var render = function() {
               ),
               _vm._v(" "),
               _vm._m(4)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group mb-3" }, [
+              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                _vm._v("Identity Picture (ID)")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "file", name: "", id: "" },
+                on: { change: _vm.onFileChange }
+              })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-3" }, [

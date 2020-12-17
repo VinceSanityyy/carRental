@@ -45,6 +45,10 @@
             </div>
           </div>
         </div>
+          <div class="input-group mb-3">
+          <label for="exampleInputEmail1">Identity Picture (ID)</label>
+          <input @change="onFileChange" type="file" name="" id="">
+        </div>
         <div class="input-group mb-3">
           <input v-model="password" type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
@@ -87,7 +91,8 @@ data(){
         confirmPass:'',
         name:'',
         phone:'',
-        role:''
+        role:'',
+        image:'',
         }
     },
     methods:{
@@ -105,26 +110,37 @@ data(){
                         width: 80,
                         height: 100,
                     })
-                    axios.post('register',{
-                        email: this.email,
-                        password: this.password,
-                        phone: this.phone,
-                        name:this.name,
-                        role: this.role,
-                    
-                    }).then((res)=>{
+                    var bodyForm = new FormData()
+                    bodyForm.append('email', this.email)
+                    bodyForm.append('password', this.password)
+                    bodyForm.append('phone', this.phone)
+                    bodyForm.append('name', this.name)
+                    bodyForm.append('role', this.role)
+                    bodyForm.append('identity', this.image)
+
+                    axios.post('register',bodyForm).then((res)=>{
                         loader.hide();
                         // console.log(res)
                         window.location.href = '/home'
                     }).catch((err)=>{
                         loader.hide();
-                        // toastr.error('Records not found')
+
+                        console.log(err.response.data.errors)
+                        var errors = err.response.data.errors
+
+                       for (var key of Object.keys(errors)) {
+                            toastr.error(errors[key])
+                        }
                     })
                 }else{
                     toastr.error('Not valid PH phone number')
                 }
             }
-        }
+        },
+        onFileChange(e) {
+          let file = e.target.files[0];
+          this.image = file
+        },
     },
     created(){
         console.log('compoent created')

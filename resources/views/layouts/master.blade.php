@@ -147,6 +147,17 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+          @if(\Auth::user()->role === \App\Enums\UserType::SUPER_ADMIN)
+          <li class="nav-item">
+            <router-link to="/userManagement" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                User Management
+              </p>
+            </router-link>
+          </li>
+          @endif
           @if(\Auth::user()->role === \App\Enums\UserType::CUSTOMER)
           <li class="nav-item">
             <router-link to="/home" class="nav-link">

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Enums\UserType;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+// use App\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -23,6 +26,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
 
     /**
      * Where to redirect users after registration.
@@ -47,14 +51,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Request $request)
     {
-        // dd($data);
+        dd($request->all());
+        $name = \Request::input('identity');
+        dd($name);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
+            'identity' => ['required','image'],
         ]);
     }
 
@@ -66,13 +73,49 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd(json_encode($data));
+        dd(json_encode($data));
+        $name = $data['identity']->getClientOriginalName();
+        $path = $data['identity']->store('public/images');
+
         return User::create([
             'name' => $data['name'],
             'role' => $data['role'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'status' => 0,
+            'identity' => $path,
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function register(Request $request)
+    {
+       
+    
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'identity' => ['required','image'],
+        ]);
+
+      
+        if($validated){
+            $name = $request->file('identity')->getClientOriginalName();
+            $path = $request->file('identity')->store('public/images');
+            // dd($path);
+            return User::create([
+                'name' => $request->name,
+                'role' => $request->role,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'status' => 0,
+                'identity' => $path,
+                'password' => Hash::make($request->password),
+            ]);
+        }
+        
+    
     }
 }

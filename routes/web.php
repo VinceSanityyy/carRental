@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,7 @@ Route::get('/login', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/cars', [App\Http\Controllers\HomeController::class, 'cars'])->name('cars');
 Route::get('/getCars', [CarsController::class, 'getCars']);
 Route::get('/getCarsForOwner', [CarsController::class, 'getCarsForOwner']);
 Route::post('/confirmReservation',[ReservationController::class,'confirmReservation']);
@@ -37,5 +39,6 @@ Route::get('paymentsuccess',[PaymentsController::class, 'payment_success']);
 Route::get('paymenterror',[PaymentsController::class, 'payment_error']);
 Route::get('getPaymentList',[PaymentsController::class, 'getPaymentList']);
 Route::post('/charge',[PaymentsController::class, 'charge']);
+Route::get('/getUsers',[UsersController::class, 'getUsers']);
 
 Route::get('{path}',[App\Http\Controllers\HomeController::class, 'index'])->where( 'path', '([A-z]+)?' );

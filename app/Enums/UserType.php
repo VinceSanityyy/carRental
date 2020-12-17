@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class UserType extends Enum
 {
-    
+    const SUPER_ADMIN = 0;
     const CUSTOMER =   1;
     const CAR_OWNER = 2;
 }
