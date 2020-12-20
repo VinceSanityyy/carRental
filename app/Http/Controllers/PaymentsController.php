@@ -86,6 +86,30 @@ class PaymentsController extends Controller
                     $reservation = Reservation::find($request->session()->get('reservation_id'));
                     $reservation->status = 1;
                     $reservation->save();
+
+                    $carOwner = Cars::find($request->session()->get('car_id'))->with('userCars')->first();
+                    dd($carOwner);
+
+                    // $ch = curl_init();
+
+                    // curl_setopt($ch, CURLOPT_URL, 'https://textko.com/api/v3/sms');
+                    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    // curl_setopt($ch, CURLOPT_POST, 1);
+                    // curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"to\": \"09171234567\",\"text\": \"Hello from API.\"}");
+
+                    // $headers = array();
+                    // $headers[] = 'Authorization: Bearer your-access-token-here';
+                    // $headers[] = 'Accept: application/json';
+                    // $headers[] = 'Content-Type: application/json';
+                    // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+                    // $result = curl_exec($ch);
+                    // if (curl_errno($ch)) {
+                    //     echo 'Error:' . curl_error($ch);
+                    // }
+                    // curl_close($ch);
+
+
                 }
                 
                 return response()->json("Payment is Successfull. Your transaction id is: ". $arr_body['id']);

@@ -13,7 +13,7 @@ class ReservationDetails extends Model
 
     public function car()
     {
-        return $this->belongsTo('App\Models\Cars',);
+        return $this->belongsTo('App\Models\Cars');
     }
 
     public function reservation()
