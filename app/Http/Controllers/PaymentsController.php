@@ -96,7 +96,7 @@ class PaymentsController extends Controller
                     $apiKey = 'a08c83b1';
                     $apiSecret = '2YDrFF9MAXqIa7xi';
     
-                    $ch = \curl_init();
+                    $ch = curl_init();
                     $postfields = array(
                         'from' => 'CarTal',
                         'text' => 'Reservation ID number: '.$request->session()->get('reservation_id').' payment paid via PayPal by customer name: '. $reservation->user->name. ' with Paypal payment id: '.$arr_body['id'],
