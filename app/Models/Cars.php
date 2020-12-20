@@ -16,7 +16,7 @@ class Cars extends Model
 
     public function userCars()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','id');
     }
 
     public function carPictures()
