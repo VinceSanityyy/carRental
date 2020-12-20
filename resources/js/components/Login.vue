@@ -88,7 +88,7 @@ export default {
             }).then((res)=>{
                 console.log(res)
                 loader.hide();
-                window.location.href = '/home';
+                window.location.href = '/index';
             }).catch((err)=>{
                 loader.hide();
                 // console.log()

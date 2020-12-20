@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="app">
-        <Home></Home>
+        <Index></Index>
     </div>
 </body>
 <script src="js/app.js"></script>

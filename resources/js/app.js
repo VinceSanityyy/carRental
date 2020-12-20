@@ -32,6 +32,8 @@ Vue.component('CarModal', require('./components/CarModal.vue').default);
 Vue.component('SelectCar', require('./components/SelectCar.vue').default);
 Vue.component('login',require('./components/Login.vue').default);
 Vue.component('register',require('./components/Register.vue').default);
+Vue.component('Index', require('./components/Index.vue').default);
+
 const routes = [
   { path: '/home', component: require('./components/Home.vue').default },
   { path: '/cars', component: require('./components/Cars.vue').default },
@@ -41,7 +43,7 @@ const routes = [
   { path: '/paymentList', component: require('./components/paymentList.vue').default },
   { path: '/reservationRequest', component: require('./components/reservationRequest.vue').default },
   { path: '/userManagement', component: require('./components/UserManagement.vue').default },
-
+  { path: '/index', component: require('./components/Index.vue').default },
 ]
 
 window.swal = swal;

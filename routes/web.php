@@ -23,6 +23,8 @@ Route::get('/login', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/cars', [App\Http\Controllers\HomeController::class, 'cars'])->name('cars');
 Route::get('/getCars', [CarsController::class, 'getCars']);
 Route::get('/getCarsForOwner', [CarsController::class, 'getCarsForOwner']);
