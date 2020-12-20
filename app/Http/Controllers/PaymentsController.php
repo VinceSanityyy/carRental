@@ -92,7 +92,7 @@ class PaymentsController extends Controller
                     $carOwner = Cars::find($request->session()->get('car_id'))->with('userCars')->first();
                     $reservation = Reservation::find($request->session()->get('reservation_id'))->with('user')->first();
         
-
+                    
                     $apiKey = 'a08c83b1';
                     $apiSecret = '2YDrFF9MAXqIa7xi';
     
