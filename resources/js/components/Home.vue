@@ -53,7 +53,7 @@
                      </div>
                   </div>
                   <div class="col-md-8">
-                     <div class="card-body">
+                     <div class="card-body table-responsive">
                         <GmapMap :center="center" :zoom="12" map-type-id="roadmap" style="width: 1000px; height: 500px">
                            <gmap-marker :position="fromLocation" :clickable="true" :draggable="false" icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" @drag="dragging($event, false, 'from')" />
                            <gmap-marker :position="toLocation" :clickable="true" :draggable="false" icon="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" @drag="dragging($event, false, 'to')" />

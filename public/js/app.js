@@ -85009,7 +85009,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-8" }, [
               _c(
                 "div",
-                { staticClass: "card-body" },
+                { staticClass: "card-body table-responsive" },
                 [
                   _c(
                     "GmapMap",
@@ -86089,7 +86089,8 @@ var render = function() {
             _c(
               "table",
               {
-                staticClass: "table table-bordered table-striped",
+                staticClass:
+                  "table table-bordered table-striped table-responsive",
                 attrs: { id: "mytable" }
               },
               [
