@@ -40,6 +40,7 @@ const routes = [
   { path: '/reservationInfo', component: require('./components/ReservationDetails.vue').default },
   { path: '/paymentList', component: require('./components/paymentList.vue').default },
   { path: '/reservationRequest', component: require('./components/reservationRequest.vue').default },
+  { path: '/userManagement', component: require('./components/UserManagement.vue').default },
 
 ]
 

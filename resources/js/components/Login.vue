@@ -91,7 +91,8 @@ export default {
                 window.location.href = '/home';
             }).catch((err)=>{
                 loader.hide();
-                toastr.error('Records not found')
+                // console.log()
+                toastr.error(err.response.data.message)
             })
         }
     },

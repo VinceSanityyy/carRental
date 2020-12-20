@@ -39,6 +39,8 @@ Route::get('paymentsuccess',[PaymentsController::class, 'payment_success']);
 Route::get('paymenterror',[PaymentsController::class, 'payment_error']);
 Route::get('getPaymentList',[PaymentsController::class, 'getPaymentList']);
 Route::post('/charge',[PaymentsController::class, 'charge']);
+
+Route::post('/approveUser',[UsersController::class,'approveUser']);
 Route::get('/getUsers',[UsersController::class, 'getUsers']);
 
 Route::get('{path}',[App\Http\Controllers\HomeController::class, 'index'])->where( 'path', '([A-z]+)?' );

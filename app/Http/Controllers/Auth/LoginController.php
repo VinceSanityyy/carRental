@@ -41,10 +41,9 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ( \Auth::user()->id === UserType::CUSTOMER ) {
-            return redirect('/home');
+        if($user->status == 0){
+            \Auth::logout($user);
+            abort(403, 'Account waiting for review');
         }
-        
-        return redirect('/cars');
     }
 }
