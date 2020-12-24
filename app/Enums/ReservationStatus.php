@@ -13,5 +13,5 @@ final class ReservationStatus extends Enum
 {
     const PENDING =   0;
     const COMPLETED =   1;
-   
+    const CANCELLED =   2;
 }

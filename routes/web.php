@@ -35,6 +35,7 @@ Route::get('/getReservationDetails',[ReservationController::class,'getReservatio
 Route::get('/getReservationRequest',[ReservationController::class,'getReservationRequest']);
 
 Route::post('/approveReservation',[ReservationController::class,'approveReservation']);
+Route::post('/cancelReservation',[ReservationController::class,'cancelReservation']);
 
 
 Route::get('paymentsuccess',[PaymentsController::class, 'payment_success']);

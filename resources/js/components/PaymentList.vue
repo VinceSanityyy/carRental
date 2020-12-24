@@ -20,7 +20,7 @@
                       </h3>
                   </div>
                   <div class="card-body table-responsive">
-                      <table id="mytable" class="table table-bordered table-striped">
+                      <table id="mytable" class="table table-bordered table-striped dt-responsive display nowrap">
                           <thead>
                               <tr>
                                     <th>Paypal Transaction #</th>

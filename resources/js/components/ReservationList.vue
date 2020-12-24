@@ -33,6 +33,7 @@
                                   <td>{{reservation.id}}</td>
                                   <td>
                                       <span class="badge bg-warning" v-if="reservation.status == 0">Waiting for Payment</span>
+                                      <span class="badge bg-danger" v-else-if="reservation.status == 2">Cancelled</span>
                                       <span class="badge bg-success" v-else>Payment Done</span>
                                   </td>
                                   <td>

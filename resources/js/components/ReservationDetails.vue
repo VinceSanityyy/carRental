@@ -78,8 +78,11 @@
                   </div>
                   <div class="card-footer">
                         <button v-if="reservation.status === 0" @click="payReservation(reservationDetails.car.reservation_fee,reservationDetails.car.id)" class="btn btn-primary btn-block">Pay reservation fee</button>
+                        <button v-else-if="reservation.status === 2" class="btn btn-primary btn-block" disabled>Cancelled</button>
                         <button v-else @click="payReservation(reservationDetails.car.reservation_fee,reservationDetails.car.id)" class="btn btn-primary btn-block" disabled>Already Paid</button>
-                       <button @click="cancelReservation(reservationDetails.car.reservation_fee)" class="btn btn-danger btn-block">Cancel reservation</button>
+
+                         <button v-if="reservation.status === 2" onclick="window.history.back()" class="btn btn-danger btn-block">Back</button>
+                        <button v-else @click="cancelReservation(reservationDetails.reservation_id)" class="btn btn-danger btn-block">Cancel reservation</button>
                        <br><br>
                        <small>Payment is non refundable</small>
                   </div>
@@ -131,9 +134,17 @@ export default {
                 })
             })
         },
-        cancelReservation(amount){
+        cancelReservation(id){
+            console.log(id)
             this.$alertify.confirm('Do you want to cancel reservation?',() =>{
-                toastr.success('wala pay function')
+                
+                axios.post('/cancelReservation',{
+                    reservation_id: id
+                }).then((res)=>{
+                    console.log(res.data)
+                    toastr.success('Cancelled!')
+                    this.$router.push('reservationList')
+                })
             })
         }
     },

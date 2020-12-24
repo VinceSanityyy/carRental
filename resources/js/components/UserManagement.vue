@@ -13,7 +13,7 @@
                       </h3>
                   </div>
                   <div class="card-body table-responsive">
-                      <table id="mytable" class="table table-bordered table-striped table-responsive">
+                      <table id="mytable" class="table table-bordered table-striped dt-responsive display nowrap" >
                           <thead>
                               <tr>
                                     <th>Name</th>
@@ -35,14 +35,15 @@
                                       <span class="badge bg-secondary" v-else>Car Owner</span>
                                   </td>
                                   <td>
-                                      <button data-toggle="modal" data-target="#exampleModal" @click="viewPhoto(user.image_link)" class="btn btn-primary">View Submitted Photo</button>
+                                      <button data-toggle="modal" data-target="#exampleModal" @click="viewPhoto(user.image_link)" class="btn btn-primary">View Photo</button>
                                   </td>
                                   <td>
                                       <span class="badge bg-warning" v-if="user.status == 0">Pending</span>
                                       <span class="badge bg-success" v-else>Approved</span>
                                   </td>
                                   <td>
-                                      <button @click="viewDetails(user.id)" class="btn btn-primary">Accept Account</button>
+                                      <button v-if="user.status == 0" @click="viewDetails(user.id)" class="btn btn-primary">Accept Account</button>
+                                      <button v-else disabled class="btn btn-warning">Accepted</button>
                                   </td>
                               </tr>
                           </tbody>
@@ -92,7 +93,9 @@ export default {
         },
         myTable(){
             $(document).ready(function(){
-                $('#mytable').DataTable()
+                $('#mytable').DataTable({
+                    responsive: true
+                })
             })
         },
         viewDetails(id){
