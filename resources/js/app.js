@@ -44,6 +44,7 @@ const routes = [
   { path: '/reservationRequest', component: require('./components/reservationRequest.vue').default },
   { path: '/userManagement', component: require('./components/UserManagement.vue').default },
   { path: '/index', component: require('./components/Index.vue').default },
+  { path: '/successPayment', component: require('./components/paymentSuccess.vue').default },
 ]
 
 window.swal = swal;

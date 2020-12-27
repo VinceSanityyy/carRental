@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-Route::get('/cars', [App\Http\Controllers\HomeController::class, 'cars'])->name('cars');
+// Route::get('/cars', [App\Http\Controllers\HomeController::class, 'cars'])->name('cars');
 Route::get('/getCars', [CarsController::class, 'getCars']);
 Route::get('/getCarsForOwner', [CarsController::class, 'getCarsForOwner']);
 Route::post('/confirmReservation',[ReservationController::class,'confirmReservation']);
@@ -36,6 +36,8 @@ Route::get('/getReservationRequest',[ReservationController::class,'getReservatio
 
 Route::post('/approveReservation',[ReservationController::class,'approveReservation']);
 Route::post('/cancelReservation',[ReservationController::class,'cancelReservation']);
+Route::post('/markAsUnavailable',[CarsController::class,'markAsUnavailable']);
+Route::post('/markAsAvailable',[CarsController::class,'markAsAvailable']);
 
 
 Route::get('paymentsuccess',[PaymentsController::class, 'payment_success']);

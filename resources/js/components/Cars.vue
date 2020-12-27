@@ -36,7 +36,8 @@
                         <div class="card-footer">
                             <h4 style="text-align:center">{{car.model}}</h4>
                              <span v-if="car.car_status === 1 " class="badge bg-danger">Booked</span>
-                             <span v-else class="badge bg-success">Available for reservation</span>
+                             <span v-else-if="car.car_status === 0" class="badge bg-success">Available for reservation</span>
+                              <span v-else class="badge bg-warning">On repair/Maintenance</span>
                            <div class="row">
                               <div class="col-sm-12 border-right">
                                  <div  class="description-block">
@@ -59,8 +60,9 @@
                                  </div>
                               </div>
                            </div>
-                            <button @click="viewDetails" class="btn btn-primary btn-block">View Details</button>
-                            <button @click="markUnavailable" class="btn btn-danger btn-block">Mark as Unavailable</button>
+                            <!-- <button @click="viewDetails" class="btn btn-primary btn-block">View Details</button> -->
+                           <button @click="markAvailable(car.id)" class="btn btn-primary btn-block">Mark as Available</button>
+                           <button :disabled="car.car_status == 1 || car.car_status == 2" @click="markUnavailable(car.id)" class="btn btn-danger btn-block">Mark as Unavailable</button>
                         </div>
                      </div>
                   </div>
@@ -87,13 +89,27 @@ export default {
         return{
             carModalOpen: false,
             hello: 'hello',
-            cars:[]
+            cars:[],
+            disable: false
         }
+    },
+    computed:{
+       isDisabled(){
+          
+       }
     },
     methods:{
         openCarModal(){
             console.log('asd')
             this.carModalOpen = !this.carModalOpen
+        },
+        disabled(item){
+           console.log(item)
+           if(item == 2 || item == 1){
+              return true
+           }else{
+              return false
+           }
         },
         getCars(){
            axios.get('/getCarsForOwner').then((res)=>{
@@ -103,13 +119,36 @@ export default {
         viewDetails(){
             toastr.success('wala pay function')
         },
-        markUnavailable(){
-            toastr.success('wala pay function')
+        markUnavailable(id){
+            // toastr.success('wala pay function')
+            this.$alertify.confirm('Mark as unavailable/on maintenance?', ()=>{
+               console.log(id)
+               axios.post('/markAsUnavailable',{
+                  id: id
+               }).then((res)=>{
+                  toastr.success('Marked as unavailable')
+                  this.getCars()
+               })
+            })
+        },
+         markAvailable(id){
+            // toastr.success('wala pay function')
+            this.$alertify.confirm('Mark as available?', ()=>{
+               console.log(id)
+               axios.post('/markAsAvailable',{
+                  id: id
+               }).then((res)=>{
+                  toastr.success('Marked as available')
+                  this.getCars()
+               })
+            })
         }
     },
     created(){
        this.getCars()
        this.$root.$refs.Cars = this;
+      //  console.log(this.disabled())
+      
     }
 }
 </script>

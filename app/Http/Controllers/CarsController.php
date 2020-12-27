@@ -34,4 +34,20 @@ class CarsController extends Controller
         $cars = Cars::where('user_id',\Auth::user()->id)->get();
         return response()->json($cars);
     }
+
+    public function markAsUnavailable(Request $request){
+        $car = Cars::find($request->id);
+        $car->car_status = CarStatus::MAINTENANCE;
+        $car->save();
+
+        return response()->json('success');
+    }
+
+    public function markAsAvailable(Request $request){
+        $car = Cars::find($request->id);
+        $car->car_status = CarStatus::AVAILABLE;
+        $car->save();
+
+        return response()->json('success');
+    }
 }

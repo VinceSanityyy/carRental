@@ -9,6 +9,7 @@ use Omnipay\Omnipay;
 use App\Models\Cars;
 use Brick\PhoneNumber\PhoneNumber;
 use Brick\PhoneNumber\PhoneNumberParseException;
+use Illuminate\Support\Facades\Http;
 class PaymentsController extends Controller
 {
     public $gateway;
@@ -96,34 +97,46 @@ class PaymentsController extends Controller
                     $apiKey = 'a08c83b1';
                     $apiSecret = '2YDrFF9MAXqIa7xi';
     
-                    $ch = curl_init();
-                    $postfields = array(
+                    // $ch = curl_init();
+                    // $postfields = array(
+                    //     'from' => 'CarTal',
+                    //     'text' => 'Reservation ID number: '.$request->session()->get('reservation_id').' payment paid via PayPal by customer name: '. $reservation->user->name. ' with Paypal payment id: '.$arr_body['id'],
+                    //     'to' =>  $phoneNum = $carOwner->userCars->phone,
+                    //     'api_key' => $apiKey,
+                    //     'api_secret' => $apiSecret
+                    // );
+                    // curl_setopt($ch, CURLOPT_URL, 'https://rest.nexmo.com/sms/json');
+                    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    // curl_setopt($ch, CURLOPT_POST, 1);
+                    // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postfields));
+    
+                    // $headers = array();
+                    // $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+                    // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+                    // $result = curl_exec($ch);
+                    // if (curl_errno($ch)) {
+                    //     echo 'Error:' . curl_error($ch);
+                    // }
+                    // curl_close($ch);
+
+                    $response = Http::post('https://rest.nexmo.com/sms/json', [
                         'from' => 'CarTal',
                         'text' => 'Reservation ID number: '.$request->session()->get('reservation_id').' payment paid via PayPal by customer name: '. $reservation->user->name. ' with Paypal payment id: '.$arr_body['id'],
-                        'to' =>  $phoneNum = $carOwner->userCars->phone,
+                        // 'to' =>  $phoneNum = $carOwner->userCars->phone,
+                        'to' => '+639270277397',
                         'api_key' => $apiKey,
                         'api_secret' => $apiSecret
-                    );
-                    curl_setopt($ch, CURLOPT_URL, 'https://rest.nexmo.com/sms/json');
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($ch, CURLOPT_POST, 1);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postfields));
-    
-                    $headers = array();
-                    $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    
-                    $result = curl_exec($ch);
-                    if (curl_errno($ch)) {
-                        echo 'Error:' . curl_error($ch);
-                    }
-                    curl_close($ch);
+                    ]);
+
+                    // dd($response);
                    
                 }
           
                 
-                return response()->json("Payment is Successfull. Your transaction id is: ". $arr_body['id']);
+                // return response()->json("Payment is Successfull. Your transaction id is: ". $arr_body['id']);
                 // return \Redirect::to('http://localhost:3000/donation/thankyou');
+                return redirect('/successPayment');
             } else {
                 return $response->getMessage();
       
