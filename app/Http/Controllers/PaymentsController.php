@@ -123,8 +123,8 @@ class PaymentsController extends Controller
                     $response = Http::post('https://rest.nexmo.com/sms/json', [
                         'from' => 'CarTal',
                         'text' => 'Reservation ID number: '.$request->session()->get('reservation_id').' payment paid via PayPal by customer name: '. $reservation->user->name. ' with Paypal payment id: '.$arr_body['id'],
-                        // 'to' =>  $phoneNum = $carOwner->userCars->phone,
-                        'to' => '+639270277397',
+                        'to' =>  $phoneNum = $carOwner->userCars->phone,
+                        // 'to' => '+639270277397',
                         'api_key' => $apiKey,
                         'api_secret' => $apiSecret
                     ]);
