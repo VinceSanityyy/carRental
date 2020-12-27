@@ -28,7 +28,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    {{-- <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -119,7 +119,7 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-    </ul>
+    </ul> --}}
   </nav>
   <!-- /.navbar -->
 
